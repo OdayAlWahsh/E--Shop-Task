@@ -4,6 +4,7 @@ import { FormOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import './carousel-category.scss';
 import { removeCategoryItem } from '../../redux/Category/category.actions'
+import EmptyImage from '../../images/emptyImage.png'
 
 type CarouselCategoryProps = {
     removeCategoryItem: Function,
@@ -18,7 +19,7 @@ const CarouselCategory = ({ removeCategoryItem, CategoryItems }: CarouselCategor
                 {CategoryItems && CategoryItems.map((props: any) => (
                     <Row>
                         <Col span={10} offset={2}  >
-                            <img width="500px" height="300px" className="img" alt="img" src={props.imageUrl} />
+                            <img width="500px" height="300px" className="img" alt="img" src={props.imageUrl ? props.imageUrl : EmptyImage} />
                         </Col>
                         <Col span={11} offset={1} >
                             <Row justify="center">

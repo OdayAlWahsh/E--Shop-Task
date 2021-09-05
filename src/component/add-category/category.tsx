@@ -22,25 +22,34 @@ const Category = ({ addCategoryItem, updateCategoryItem, CategoryItems }: Catego
     const [messageError, setMessageError] = useState(false);
 
     const onFinish = (values: any) => {
-        setItem({ ...item, name: values.CategoryName, imageUrl: values.password });
+        setItem({ ...item, name: values.CategoryName });
         if (!idParams)
-            addCategoryItem({ id: Math.random().toString(36).substring(2, 7), name: values.CategoryName, imageUrl: values.password })
+            addCategoryItem({ id: Math.random().toString(36).substring(2, 7), name: values.CategoryName, imageUrl: item.imageUrl })
         else
-            updateCategoryItem({ id: idParams, name: values.CategoryName, imageUrl: values.password })
+            updateCategoryItem({ id: idParams, name: values.CategoryName, imageUrl: item.imageUrl })
     };
 
-    useEffect(() => {
+    const handleLoadLocalFile = (event: any) => {
+        event.preventDefault();
+        const reader = new FileReader();
+        const file = event.target.files[0];
+        if (file) {
+            reader.onloadend = () =>
+                setItem({ ...item, imageUrl: reader.result });
+            reader.readAsDataURL(file);
+        }
+    }
 
+    useEffect(() => {
         const existingCartItem = CategoryItems && CategoryItems.find(
             (cartItemItem: any) => cartItemItem.name === item.name
         )
-
         if (existingCartItem && !idParams) {
             setMessageError(true)
         } else {
             setMessageError(false)
         }
-    }, [item, CategoryItems, idParams]);
+    }, [item]);
 
     return (
         <div className="m-category">
@@ -65,11 +74,11 @@ const Category = ({ addCategoryItem, updateCategoryItem, CategoryItems }: Catego
                         </Form.Item>
 
                         <Form.Item
-                            label="Password"
-                            name="password"
-                            rules={[{ required: true, message: 'Please input your password!' }]}
+                            label="Picture"
+                            name="picture"
+                            rules={[{ required: true, message: 'Please upload Picture!' }]}
                         >
-                            <Input />
+                            <Input type="file" accept=".jpg, .jpeg, .png" onChange={(e) => (handleLoadLocalFile(e))} />
                         </Form.Item>
 
                         <Form.Item wrapperCol={{ offset: 16, span: 6 }}>

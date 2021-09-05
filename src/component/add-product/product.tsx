@@ -24,12 +24,24 @@ const Product = ({ addProductItem, updateProductItem, CategoryItems, ProductItem
     const { Option } = Select;
 
     const onFinish = (values: any) => {
-        setItem({ ...item, name: values.ProductName, categoryId: values.ProductCategory, imageUrl: values.Picture, price: values.Productprice });
+        setItem({ ...item, name: values.ProductName, categoryId: values.ProductCategory, price: values.Productprice });
         if (!idParams)
-            addProductItem({ id: Math.random().toString(36).substring(2, 7), name: values.ProductName, categoryId: values.ProductCategory, imageUrl: values.Picture, price: values.Productprice })
-        else
-            updateProductItem({ id: idParams, name: values.ProductName, categoryId: values.ProductCategory, imageUrl: values.Picture, price: values.Productprice })
+            addProductItem({ id: Math.random().toString(36).substring(2, 7), name: values.ProductName, categoryId: values.ProductCategory, imageUrl: item.imageUrl, price: values.Productprice })
+        else {
+            updateProductItem({ id: idParams, name: values.ProductName, categoryId: values.ProductCategory, imageUrl: item.imageUrl, price: values.Productprice })
+        }
     };
+
+    const handleLoadLocalFile = (event: any) => {
+        event.preventDefault();
+        const reader = new FileReader();
+        const file = event.target.files[0];
+        if (file) {
+            reader.onloadend = () =>
+                setItem({ ...item, imageUrl: reader.result });
+            reader.readAsDataURL(file);
+        }
+    }
 
     useEffect(() => {
         const existingProductItem = ProductItems && ProductItems.find(
@@ -40,7 +52,7 @@ const Product = ({ addProductItem, updateProductItem, CategoryItems, ProductItem
         } else {
             setMessageError(false)
         }
-    }, [item, idParams, ProductItems]);
+    }, [item]);
 
     return (
         <div className="m-product">
@@ -86,10 +98,10 @@ const Product = ({ addProductItem, updateProductItem, CategoryItems, ProductItem
 
                         <Form.Item
                             label="Picture"
-                            name="Picture"
-                            rules={[{ required: true, message: 'Please input your Picture!' }]}
+                            name="picture"
+                            rules={[{ required: true, message: 'Please upload Picture!' }]}
                         >
-                            <Input />
+                            <Input type="file" accept=".jpg, .jpeg, .png" onChange={(e) => (handleLoadLocalFile(e))} />
                         </Form.Item>
 
                         <Form.Item wrapperCol={{ offset: 16, span: 6 }}>

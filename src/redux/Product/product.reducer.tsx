@@ -2,8 +2,8 @@ import { ProductTypes, ActionType, InitialStateType } from './product.types'
 import { addItemToProduct, removeItemFromProduct, updateItemFromProduct } from './product.utils'
 
 const INITIAL_STATE: InitialStateType = {
-  ProductItems: [{ id: '4', categoryId: '1', name: 'Hp', imageUrl: 'product', price: '12' },
-  { id: '4', categoryId: '2', name: 'Nike', imageUrl: 'product', price: '22' }]
+  ProductItems: [{ id: '1', categoryId: '1', name: 'Hp', imageUrl: '', price: '12' },
+  { id: '2', categoryId: '2', name: 'Nike', imageUrl: '', price: '22' }]
 }
 
 const productReducer = (state = INITIAL_STATE, action: ActionType) => {

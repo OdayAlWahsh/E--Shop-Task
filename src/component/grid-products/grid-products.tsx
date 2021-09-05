@@ -3,7 +3,8 @@ import { Card, Row, Col, Button } from 'antd';
 import { FormOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { removeProductItem } from '../../redux/Product/product.actions'
+import { removeProductItem } from '../../redux/Product/product.actions';
+import EmptyImage from '../../images/emptyImage.png'
 import './grid-products.scss';
 
 type CarouselCategoryProps = {
@@ -25,11 +26,10 @@ const AllProducts = ({ ProductItems, removeProductItem }: CarouselCategoryProps)
                 <>
                     {idParams === props.categoryId ?
                         <Col span={7} offset={1} >
-
                             <Card
                                 className="m-card"
                                 cover={
-                                    <img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />}>
+                                    <img width="200px" height="200px" alt="img" src={props.imageUrl ? props.imageUrl : EmptyImage} />}>
                                 <Row className="container-icons">
                                     <Link to={`/UpdateProduct/${props.id}/${props.name}`}> <Button type="link" className="button" icon={<FormOutlined />} /></Link>
                                     <Button type="link" className="button" icon={<DeleteOutlined />} onClick={() => removeProductItem({ id: props.id, name: props.name, categoryId: props.categoryId, imageUrl: props.imageUrl, price: props.price })} />
