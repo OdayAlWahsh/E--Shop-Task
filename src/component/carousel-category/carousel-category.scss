@@ -1,0 +1,27 @@
+.m-carousel-category {
+    padding: 3em 0em 0em 0em;
+    background-color: rgba(236, 246, 251, 0.4);
+    .carousel {
+        height: 30em;
+        .img {
+            box-sizing: border-box;
+            border-radius: 13px;
+        }
+        .btn-add-delete{
+            color: #07c0de
+        }
+        .btn-view{
+            color: #00b189
+        }
+    }
+    .ant-carousel .slick-list .slick-slide > div > div {
+        display: flex !important;
+    }
+    .ant-carousel .slick-dots li.slick-active button {
+        background: black;
+    }
+
+    .ant-carousel .slick-dots li button {
+        background: rgb(70, 61, 61);
+    }
+}

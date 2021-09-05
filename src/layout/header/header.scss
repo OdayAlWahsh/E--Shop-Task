@@ -1,0 +1,16 @@
+.m-header {
+    background-color: #fff;
+    align-items: center;
+    padding: 1em;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    z-index: 100;
+    .ant-btn-link {
+        color: #000;
+    }
+    .ant-btn:not([disabled]):hover {
+        color: #07c0de;
+    }
+    .h-title {
+        white-space: nowrap;
+    }
+}

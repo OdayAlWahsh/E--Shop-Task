@@ -1,0 +1,20 @@
+.m-grid-product {
+    padding-top: 3em;
+    .m-card {
+        width: 22em;
+        box-shadow: 0 1px 10px 0 rgb(0 0 0 / 10%);
+        border-radius: 8px;
+        .container-icons {
+            position: absolute;
+            top: 1em;
+            left: 16em;
+            .button {
+                color: #07c0de;
+            }
+        }
+        .card-content {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}
